@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #85af4b;
+    font-family: "Arial";
+    font-size: 14px;
+    font-weight: 400;
+    color: #486933;
+}
+
+.search-field {
+    border-radius: 5px;
+}
+
+#content {
+    margin-top: 50px;
+}
+
+.contacts {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.search-field {
+    width: 100%;
+    padding: 9px;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.contacts-list {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #486933;
+    border-radius: 5px;
+    background-color: #e4f5af;
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.contact:hover {
+    cursor: pointer;
+}
+
+.contact:not(:last-child) {
+    border-bottom: 1px solid #486933;
+}
+
+.contact-img {
+    margin-right: 10px;
+}
+
+.contact-name {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.show {
+    max-height: 50px;
+    transition: max-height .4s ease;
+    overflow: hidden;
+}
+
+.hide {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .4s ease;
+}

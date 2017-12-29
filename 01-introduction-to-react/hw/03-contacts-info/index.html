@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Contacts</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="content"></div>
+
+	<script type="text/babel">
+		var CONTACTS = [
+			{
+				id: 1,
+				name: 'July',
+				phoneNumber: '+380964739122',
+				image: 'img/c1.png',
+				address: 'Florenzer Str. 8-12',
+				email: 'july@gmail.com'
+			},
+			{
+				id: 2,
+				name: 'Коля Питон',
+				phoneNumber: '+380964739123',
+				image: 'img/c2.png',
+				address: 'Oxforder Passage',
+				email: 'kolya@gmail.com'
+			},
+			{
+				id: 3,
+				name: 'Petya',
+				phoneNumber: '+380964739124',
+				image: 'img/c3.png',
+				address: 'Trondheimer Weg',
+				email: 'petya@gmail.com'
+			},
+			{
+				id: 4,
+				name: 'Афанасий',
+				phoneNumber: '+380964739125',
+				image: 'img/c4.png',
+				address: 'Osloer Str. 6',
+				email: 'aphansy@gmail.com'
+			},
+			{
+				id: 5,
+				name: 'Лена',
+				phoneNumber: '+380964739126',
+				image: 'img/c1.png',
+				address: 'blv Slavy, 6b',
+				email: 'lena@gmail.com'
+			}
+		];
+		
+		var Contact = React.createClass({
+			getInitialState: function() {
+				return {
+					isOpened: 'hide'
+				};
+			},
+
+			handleShow: function () {
+				this.setState({
+					isOpened: this.state.isOpened == 'show' ? 'hide' : 'show'
+				});
+			},
+
+			render: function () {
+				return (
+					<li className="contact" onClick={this.handleShow}>
+						<img className="contact-img" src={this.props.image} width="60px" height="60px" />
+						<div className="contact-info">
+							<div className="contact-name"> {this.props.name} </div>
+							<div className="contact-number"> {this.props.phoneNumber} </div>
+							<div className={this.state.isOpened}>
+								<div className="contact-address"> {this.props.address} </div>
+								<div className="contact-email"> {this.props.email} </div>
+							</div>
+						</div>
+					</li>
+				);
+			}
+		});
+
+		var ContactList = React.createClass({
+			getInitialState: function () {
+				return {
+					displayedContacts: CONTACTS
+				};
+			},
+
+			handleSearch: function (event) {
+				var searchQuery = event.target.value.toLowerCase();
+				var displayedContacts = CONTACTS.filter(function (el) {
+					var searchValue = el.name.toLowerCase();
+					return searchValue.indexOf(searchQuery) !== -1;
+				});
+
+				this.setState({
+					displayedContacts: displayedContacts
+				});
+			},
+
+			render: function () {
+				return (
+					<div className="contacts">
+						<input type="text" className="search-field" onChange={this.handleSearch} />
+						<ul className="contacts-list">
+							{
+								this.state.displayedContacts.map(function (el) {
+									return <Contact
+											key={el.id}
+							                name={el.name}
+							                phoneNumber={el.phoneNumber}
+							                image={el.image}
+											address={el.address}
+											email={el.email}
+									/>;
+								})
+							}
+						</ul>
+					</div>
+				);
+			}
+		});
+
+		ReactDOM.render(
+			<ContactList />,
+			document.getElementById("content")
+		);
+	</script>
+
+</body>
+</html>

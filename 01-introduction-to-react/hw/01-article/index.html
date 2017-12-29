@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Article</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+</head>
+<body>
+
+	<div id="content"></div>
+
+	<script type="text/babel">
+		var ARTICLES = [
+			{
+				id: 1,
+				title: 'Title 1',
+				author: 'July',
+				body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aperiam autem beatae dolore, dolorem error excepturi incidunt labore modi nam nobis nulla odio optio perferendis perspiciatis, quae, quis repudiandae tempore!'
+			},
+			{
+				id: 2,
+				title: 'Title 2',
+				author: 'Ivan',
+				body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aperiam autem beatae dolore, dolorem error excepturi incidunt labore modi nam nobis nulla odio optio perferendis perspiciatis, quae, quis repudiandae tempore!'
+			},
+			{
+				id: 3,
+				title: 'Title 3',
+				author: 'Roman',
+				body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aperiam autem beatae dolore, dolorem error excepturi incidunt labore modi nam nobis nulla odio optio perferendis perspiciatis, quae, quis repudiandae tempore!'
+			}
+		];
+
+		var Article = React.createClass({
+			render: function () {
+				return (
+					<div className="article">
+						<div className="article-info">
+							<h1 className="article-title"> {this.props.title} </h1>
+							<h3 className="article-author"> {this.props.author} </h3>
+						</div>
+						<p className="article-body"> {this.props.body} </p>
+					</div>
+				);
+			}
+		});
+
+		ReactDOM.render(
+				<div className="article-list">
+					{
+						ARTICLES.map(function (el) {
+							return <Article
+								key={el.id}
+								title={el.title}
+							    author={el.author}
+							    body={el.body}
+							/>;
+						})
+					}
+				</div>,
+			document.getElementById('content')
+		);
+	</script>
+
+</body>
+</html>
